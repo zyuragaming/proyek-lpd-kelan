@@ -1,0 +1,444 @@
+/* ===== PERUBAHAN DI SINI: Mengimpor font Poppins ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Reset dasar dan font */
+body {
+    /* ===== PERUBAHAN DI SINI: Menerapkan font Poppins ===== */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #E9ECEF; /* Warna latar belakang abu-abu muda */
+    color: #333;
+    font-size: 13px !important;
+}
+
+/* Container utama menggunakan Flexbox untuk layout 2 kolom */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.sidebar-header {
+    align-items: center;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    padding: 15px;
+    text-decoration: none;
+    color: #ffffff;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-item.active {
+      background-color: #333446 !important;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+/* --- Styling untuk Konten Utama --- */
+.main-content {
+    flex-grow: 1;
+    padding: 25px;
+    transition: all 0.3s ease-in-out;
+    
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.main-header h1 {
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+#map, #map-wilayah {
+    height: 450px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-section h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.form-section form input, .form-section form button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-section form button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.form-section form button:hover {
+    background-color: #16a085;
+}
+
+/* --- Styling untuk Dropdown --- */
+.nav-item.has-submenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+.nav-item-dropdown.open .arrow {
+    transform: rotate(180deg);
+}
+.submenu {
+    background-color: #22303f;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+.nav-item-dropdown.open .submenu {
+    max-height: 200px;
+}
+.submenu-item {
+    display: block;
+    padding: 12px 20px 12px 35px;
+    text-decoration: none;
+    color: #bdc3c7;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+.submenu-item:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+/* --- Styling untuk Geolocation --- */
+.coords-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.coords-group input {
+    width: 100%;
+    margin-bottom: 0;
+}
+#get-coords-btn {
+    padding: 12px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+#get-coords-btn:hover {
+    background-color: #2980b9;
+}
+
+/* --- Styling untuk Toggle Sidebar --- */
+.sidebar-toggle-btn {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #555;
+}
+.app-container.sidebar-collapsed .sidebar {
+    margin-left: -250px;
+}
+.app-container.sidebar-collapsed .sidebar-header h3,
+.app-container.sidebar-collapsed .nav-item span,
+.app-container.sidebar-collapsed .nav-item .arrow {
+    display: none;
+}
+
+/* --- Styling untuk Halaman Filter --- */
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+.card-header {
+    padding: 15px 20px;
+    background-color: #343A40; /* Header card gelap */
+    color: white; /* Teks header card putih */
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: flex;
+    align-items: center;
+    
+}
+.card-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+.card-body {
+    padding: 20px;
+}
+#filter-form-wilayah {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.form-group label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #555;
+}
+.form-group input, .form-group select, .form-group textarea {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif; /* Terapkan juga di form */
+}
+.form-actions {
+    margin-left: auto;
+}
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif; /* Terapkan juga di tombol */
+}
+
+.btn-primary {
+    background-color: #007BFF; /* Tombol Cari biru */
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #28A745; /* Tombol Tambah/Cetak hijau */
+    color: white;
+}
+.data-table-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-table-section th, .data-table-section td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+.data-table-section th {
+    background-color: #f9f9f9;
+}
+
+/* --- Styling untuk Modal --- */
+.modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+}
+.modal-close:hover {
+    color: #333;
+}
+.modal-content h2 {
+    margin-top: 0;
+}
+
+/* --- Kelas Utilitas --- */
+/* Kelas ini akan menyembunyikan elemen (termasuk modal) secara default */
+.hidden {
+    display: none;
+}
+/* ===== MULAI KODE CSS UNTUK PETA & LEGENDA ===== */
+
+/* Mengatur agar peta dan legenda bisa berdampingan */
+.map-container {
+    display: flex;
+    gap: 20px; /* Jarak antara peta dan legenda */
+}
+
+/* Mengatur agar peta mengisi ruang yang tersedia */
+#map-wilayah {
+    flex-grow: 1;
+}
+
+/* Styling untuk kotak legenda */
+.map-legend {
+    width: 200px; /* Lebar tetap untuk legenda */
+    flex-shrink: 0; /* Mencegah legenda menyusut */
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    height: fit-content; /* Tinggi legenda menyesuaikan isinya */
+}
+
+.map-legend h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 12px;
+}
+
+/* Styling untuk setiap item di legenda */
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+/* Styling untuk bulatan warna */
+.legend-color {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+}
+
+/* ===== SELESAI KODE CSS UNTUK PETA & LEGENDA ===== */
+/* ===== MULAI KODE CSS UNTUK FOOTER PETA ===== */
+
+/* Menata letak footer di bawah peta */
+.card-footer {
+    padding: 15px 20px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Memberi jarak antar elemen */
+}
+
+/* Mengatur agar grup form di footer tidak memiliki margin bawah */
+.card-footer .form-group {
+    margin-bottom: 0;
+    flex-grow: 1; /* Membuat select box mengisi sisa ruang yang tersedia */
+}
+
+/* Label yang hanya bisa dibaca oleh screen reader, untuk aksesibilitas */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+/* ===== SELESAI KODE CSS UNTUK FOOTER PETA ===== */
+ .body_login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #E9ECEF;
+        }
+        .login-container {
+            width: 350px;
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .login-container img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        .login-container h2 {
+            margin-bottom: 25px;
+            color: #343A40;
+        }
+        .login-container .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .login-container .btn-primary {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        #error-message {
+            color: #E74C3C;
+            margin-top: 15px;
+            font-size: 12px;
+            display: none; /* Sembunyi secara default */
+        }

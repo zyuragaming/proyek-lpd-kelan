@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Nasabah - LPD Kelan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar" style="background-color: #28A745">
+            <div class="nav-item"></div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 d-flex text-white" style="min-height: 100vh;" >
+                <nav class=" container-fluid flex-shrink-0 " style="background-color: #343A40">
+                <!-- ===== BAGIAN SIDEBAR ===== -->
+                    <div class="sidebar-header">
+                        <img src="https://placehold.co/60x60/00897b/FFFFFF?text=LPD" alt="Logo LPD" class="logo">
+                        <h6 style="text-align: center;">LPD Desa Adat Kelan</h6>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="{{ url_for('index') }}" class="nav-item">Dashboard</a>
+                        <!-- Beri kelas 'active' pada menu ini -->
+                        <a href="{{ url_for('master_nasabah') }}" class="nav-item active">Master Nasabah</a>
+                        <div class="nav-item-dropdown">
+                            <a href="#" class="nav-item has-submenu" id="pemetaan-menu">
+                                <span>Pemetaan</span>
+                                <span class="arrow">▼</span>
+                            </a>
+                            <div class="submenu">
+                                <a href="{{ url_for('pemetaan_wilayah') }}" class="submenu-item">Per Wilayah</a>
+                                <a href="#" class="submenu-item">Per Produk</a>
+                                <a href="#" class="submenu-item">Klasifikasi</a>
+                            </div>
+                        </div>
+                        <a href="#" class="nav-item">Laporan</a>
+                        <a href="#" class="nav-item">Broadcast</a>
+                        <a href="#" class="nav-item">Register User</a>
+                        <a href="{{ url_for('logout') }}" class="nav-item">Logout</a>
+                    </nav>
+                </nav>
+            </div>   
+            <!-- ===== BAGIAN KONTEN UTAMA ===== -->
+            <div class="col-9 mt-3">
+                <div class="card">
+                    <div class="card-header main-header">
+                        <h6>Master Nasabah</h6>
+                    </div>
+                    <div class="card-body">
+                        <!-- Filter & Aksi Section -->
+                        <section class="filter-section">
+                            <div class="card-body" style="display: flex; gap: 10px; align-items: center;">
+                                <input type="text" id="search-input" placeholder="Masukkan ID atau Nama Nasabah..." style="flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                                <button id="search-btn" class="btn-primary">Cari</button>
+                                <!-- ===== PERBAIKAN DI SINI: Pastikan id="add-btn" ===== -->
+                                <button id="add-btn" class="btn-secondary" style="background-color: #27ae60;">Tambah</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Tabel Data Nasabah -->
+                <section class="data-table-section card">
+                    <div class="card-header">
+                        <h6>Daftar Nasabah</h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Nasabah</th>
+                                    <th>NIK</th>
+                                    <th>Nama</th>
+                                    <th>Alamat</th>
+                                    <th>No. Telpon</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="nasabah-table-body">
+                                <!-- Data akan diisi oleh JavaScript -->
+                                <tr><td colspan="8" style="text-align: center;">Memuat data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section> 
+            </div>  
+        </div>
+    </div>
+
+    <!-- ===== MODAL BARU UNTUK TAMBAH NASABAH ===== -->
+    <div id="modal-tambah-nasabah" class="modal-container hidden">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <h6>Tambah Data Nasabah</h6>
+            <form id="form-tambah-nasabah-master">
+                <!-- ===== PERUBAHAN DI SINI ===== -->
+                <div class="form-group">
+                    <label for="id_nasabah">ID Nasabah</label>
+                    <input type="text" id="id_nasabah" readonly style="background-color: #eee;">
+                </div>
+                <div class="form-group">
+                    <label for="nik">NIK</label>
+                    <input type="number" id="nik" required>
+                </div>
+                <div class="form-group">
+                    <label for="nama_nasabah">Nama</label>
+                    <input type="text" id="nama_nasabah" required>
+                </div>
+                <div class="form-group">
+                    <label for="no_tlpn_nasabah">No. Telepon</label>
+                    <input type="tel" id="no_tlpn_nasabah">
+                </div>
+                <div class="form-group">
+                    <label for="alamat_nasabah">Alamat</label>
+                    <textarea id="alamat_nasabah" rows="3" required></textarea>
+                </div>
+                <div class="coords-group">
+                    <div class="form-group" style="flex-grow: 1;">
+                        <label for="langitude">Latitude</label>
+                        <input type="text" id="langitude" required>
+                    </div>
+                    <div class="form-group" style="flex-grow: 1;">
+                        <label for="longitude">Longitude</label>
+                        <input type="text" id="longitude" required>
+                    </div>
+                    <button type="button" id="get-coords-btn" title="Dapatkan Koordinat Saat Ini">📍</button>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script JS -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/master_nasabah.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
